@@ -1,0 +1,187 @@
+In the provided CSS code, the number of rows is not explicitly defined for the main grid container. In CSS Grid, the number of rows can be 
+implicitly determined by the content inside the grid container. When you specify the grid-template-columns property, it automatically creates 
+rows based on the content and the specified column structure.
+
+                                            main {
+                                            display: grid;
+                                            grid-template-columns: minmax(2rem, 1fr) minmax(min-content, 94rem) minmax(2rem, 1fr);
+                                            row-gap: 3rem;
+                                            }
+
+display: grid;: This property turns the main element into a grid container.
+
+grid-template-columns: minmax(2rem, 1fr) minmax(min-content, 94rem) minmax(2rem, 1fr);: This property defines three columns for the grid. 
+The minmax() function is used to set a flexible width for the columns. The first and third columns have a minimum width of 2rem and a maximum 
+width of 1fr, meaning they can take up available space. The second column has a minimum width set to min-content (the width of the content) and
+ a maximum width of 94rem.
+
+row-gap: 3rem;: This property specifies a gap of 3rem between rows.
+
+Since the number of rows is not explicitly defined, the grid will automatically create rows based on the content inside the main element. 
+Each child element (sections or other elements) within the main element will be placed in the grid columns specified, and the grid will create 
+rows as needed.
+
+For example, in the HTML, we have three sections within the main element (heading, text, and text-with-images). Each of these sections will be 
+placed in the specified grid columns, and the grid will create rows accordingly based on the content height
+
+
+*****************************************************************************************
+Heading Section:
+
+                            .heading {
+                            grid-column: 2 / 3;
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            row-gap: 1.5rem;
+                            }
+The heading section is placed in the second column. It has two columns with a gap between rows.
+
+*****************************************************************************************
+Text Section:
+
+                            .text {
+                            grid-column: 2 / 3;
+                            font-size: 1.8rem;
+                            letter-spacing: 0.6px;
+                            column-width: 25rem;
+                            text-align: justify;
+                            }
+The text section is in the second column, and the content is justified. The column-width property is set to 25rem, which controls the 
+optimal width of columns.
+
+*****************************************************************************************
+
+Hero Section:
+
+                            .hero {
+                            grid-column: 1 / -1;
+                            position: relative;
+                            }
+
+The hero section spans across all columns. The hero title and subtitle are centered using absolute positioning.
+
+
+In CSS Grid, the grid-column property is used to specify the range of columns a grid item should occupy. The value 1 / -1 is a shorthand notation for defining the 
+starting and ending grid lines.
+
+Here's what grid-column: 1 / -1; means:
+
+1: The grid item starts at the first vertical grid line.
+-1: The grid item ends at the last vertical grid line.
+
+Using -1 as the ending line is a convenient shorthand in CSS Grid. It essentially means "end at the last line" regardless of the number of columns in the grid. This 
+is especially useful when you want an item to span across all available columns without explicitly specifying the total number of columns.
+
+In other words, grid-column: 1 / -1; is a way of saying "occupy all columns in the grid starting from the first column."
+
+Here's an example to illustrate:
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns in the grid */
+}
+
+.hero {
+  grid-column: 1 / -1; /* Span across all columns */
+}
+
+******************************************************************************************
+
+                                .social-icons {
+                                display: grid;
+                                font-size: 3rem;
+                                grid-template-columns: repeat(5, 1fr);
+                                grid-auto-flow: column;
+                                grid-auto-columns: 1fr;
+                                align-items: center;
+                                }
+display: grid;: This property defines the element as a grid container. It enables a grid context for its children.
+
+font-size: 3rem;: This sets the font size for the text inside the .social-icons element to 3 rem units.
+
+grid-template-columns: repeat(5, 1fr);: This property defines the number and size of columns in the grid. It creates a grid with 5 columns, each occupying an equal 
+fraction of the available space (1fr).
+
+grid-auto-flow: column;: This property determines how the grid items are placed in the grid when there is additional space available. In this case, it specifies that 
+the items should be placed in columns. If there are more items than can fit in a row, they will flow into the next column.
+
+grid-auto-columns: 1fr;: This property sets the size of columns created implicitly by grid-auto-flow. It ensures that any additional columns created to accommodate 
+more items have a size of 1fr (equal fraction of available space).
+
+align-items: center;: This property aligns the grid items along the block (vertical) axis. In this case, it centers the items vertically within the grid container.
+
+In summary, the .social-icons class is using CSS Grid to create a grid with 5 equally sized columns. If there are more social icons than can fit in a row, they will 
+flow into the next column. The items are centered vertically within the grid container, and each item has a font size of 3 rem.
+
+*******************************************************************************************
+
+Text with Images Section:
+
+                                .text-with-images {
+                                display: grid;
+                                grid-template-columns: 1fr 2fr;
+                                grid-column: 2 / 3;
+                                column-gap: 3rem;
+                                margin-bottom: 3rem;
+                                column-width: 50rem;
+                                }
+display: grid;: This property is used to define the element as a grid container, allowing you to use grid properties for its children.
+
+grid-template-columns: 1fr 2fr;: This property sets the columns of the grid. In this case, it creates a grid with two columns. The first column takes up one fraction
+ of the available space (1fr), and the second column takes up two fractions (2fr).
+
+grid-column: 2 / 3;: This property specifies the placement of the element within the grid in terms of columns. It sets the element to start at the second column line
+ and end at the third column line.
+
+column-gap: 3rem;: This property sets the gap (space) between columns in the grid. In this case, it's set to 3rem.
+
+margin-bottom: 3rem;: This property adds a margin at the bottom of the .text-with-images section, creating space between this section and the next.
+
+column-width: 50rem;: This property specifies the ideal width of columns in the grid when using the column value for the grid-template-columns property. It sets the
+ ideal width of columns to be 50rem. Note that column-width is generally used in multicol layout, but here it might not have the intended effect as it's applied to a 
+ grid container.
+
+Overall, this CSS code creates a grid for the .text-with-images section with two columns, a gap of 3rem between columns, and the section is positioned in the second 
+column of the main grid (column lines 2 to 3). The column-width property, however, may not have a significant effect in this context, as it's more commonly used in 
+multicol layouts. If you want to control the width of individual columns, adjusting the grid-template-columns values might be more appropriate.
+
+*******************************************************************************************
+
+Image Wrapper Styles:
+
+                                        .image-wrapper {
+                                        display: grid;
+                                        grid-template-columns: 1fr 2fr;
+                                        grid-template-rows: repeat(3, min-content);
+                                        gap: 2rem;
+                                        place-items: center;
+                                        }
+display: grid;: This property is used to define the element as a grid container, allowing you to use grid properties for its children.
+
+grid-template-columns: 1fr 2fr;: This property sets the columns of the grid. The grid has two columns. The first column takes up one fraction of the available 
+space (1fr), and the second column takes up two fractions (2fr).
+
+grid-template-rows: repeat(3, min-content);: This property sets the rows of the grid. It uses the repeat function to create three rows, and min-content is used to 
+set the height of each row based on its content.
+
+gap: 2rem;: This property sets the gap (space) between grid items, both rows and columns. In this case, it's set to 2rem.
+
+place-items: center;: This property is a shorthand for both align-items and justify-items. It centers the grid items both horizontally and vertically within the grid.
+
+                                        .image-1, .image-3 {
+                                        grid-column: 1 / -1;
+                                        }
+
+.image-1, .image-3: This selector targets elements with the class .image-1 and .image-3.
+
+grid-column: 1 / -1;: This property specifies the placement of the elements within the grid in terms of columns. It sets the elements to start at the first column 
+line and end at the last column line (-1 represents the last column line). Essentially, this makes the elements span across all columns.
+
+In summary, the .image-wrapper creates a grid with two columns and three rows, centered grid items with a gap of 2rem. .image-1 and .image-3 span across all columns 
+of the grid.
+
+*******************************************************************************************
+
+
+
+
